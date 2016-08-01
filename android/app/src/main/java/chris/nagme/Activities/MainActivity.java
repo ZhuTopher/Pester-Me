@@ -8,19 +8,31 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 
 import chris.nagme.R;
 
 public class MainActivity extends AppCompatActivity {
 
+	private RelativeLayout rootView;
+	private FrameLayout taskListContainer;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		this.rootView = (RelativeLayout) findViewById(R.id.root_main);
+
+		// setup toolbar
 		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 		setSupportActionBar(toolbar);
 
-		FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+		//setup task list container
+		this.taskListContainer = (FrameLayout) this.rootView.findViewById(R.id.task_list_container);
+
+		//setup floating action button
+		FloatingActionButton fab = (FloatingActionButton) this.rootView.findViewById(R.id.fab);
 		fab.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
