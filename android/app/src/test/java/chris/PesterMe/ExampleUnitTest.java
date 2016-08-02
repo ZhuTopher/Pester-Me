@@ -1,4 +1,4 @@
-package chris.nagme;
+package chris.PesterMe;
 
 import org.junit.Test;
 

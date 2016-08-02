@@ -1,4 +1,4 @@
-package chris.nagme;
+package chris.PesterMe;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
 		// Context of the app under test.
 		Context appContext = InstrumentationRegistry.getTargetContext();
 
-		assertEquals("chris.nagme", appContext.getPackageName());
+		assertEquals("chris.PesterMe", appContext.getPackageName());
 	}
 }

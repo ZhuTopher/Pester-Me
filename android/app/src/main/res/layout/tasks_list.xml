@@ -4,7 +4,7 @@
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
-	tools:context="chris.nagme.Activities.MainActivity"
+	tools:context="chris.PesterMe.Activities.MainActivity"
 	tools:showIn="@layout/activity_main"
 	android:id="@+id/tasks_list"
 	android:layout_width="match_parent"
