@@ -1,4 +1,4 @@
-package chris.nagme.Activities;
+package chris.PesterMe.Activities;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -11,7 +11,7 @@ import android.view.MenuItem;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 
-import chris.nagme.R;
+import chris.PesterMe.R;
 
 public class MainActivity extends AppCompatActivity {
 
