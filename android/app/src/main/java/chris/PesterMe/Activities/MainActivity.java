@@ -1,34 +1,37 @@
 package chris.PesterMe.Activities;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import chris.PesterMe.Fragments.HomeFragment;
 import chris.PesterMe.R;
 
 public class MainActivity extends AppCompatActivity {
 
-	private DrawerLayout rootDrawerLayout;
+	private RelativeLayout rootView;
+	private DrawerLayout navDrawerLayout;
 	private ActionBarDrawerToggle actionBarDrawerToggle;
 
-	private FrameLayout taskListContainer;
+	private FrameLayout mainFragContainer;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
-		this.rootDrawerLayout = (DrawerLayout) findViewById(R.id.root_main);
+		setContentView(R.layout.activity_main); // TODO: change layout based on device screen
+
+		this.rootView = (RelativeLayout) findViewById(R.id.home_root);
+		this.navDrawerLayout = (DrawerLayout) this.rootView.findViewById(R.id.nav_drawer_layout);
 
 		// setup toolbar
-		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+		Toolbar toolbar = (Toolbar) this.rootView.findViewById(R.id.toolbar);
 		setSupportActionBar(toolbar);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		getSupportActionBar().setHomeButtonEnabled(true);
@@ -36,23 +39,33 @@ public class MainActivity extends AppCompatActivity {
 //		getSupportActionBar().setHomeActionContentDescription(R.string.app_name);
 
 		this.actionBarDrawerToggle = new ActionBarDrawerToggle(MainActivity.this,
-				this.rootDrawerLayout, R.string.app_name, R.string.app_name);
+				this.navDrawerLayout, R.string.app_name, R.string.app_name);
 //		this.actionBarDrawerToggle.setDrawerIndicatorEnabled(true);
 //		this.actionBarDrawerToggle.setHomeAsUpIndicator(R.drawable.ic_first_page_white_24px);
 		this.actionBarDrawerToggle.syncState();
-		this.rootDrawerLayout.addDrawerListener(this.actionBarDrawerToggle);
+		this.navDrawerLayout.addDrawerListener(this.actionBarDrawerToggle);
 
-		//setup task list container
-		this.taskListContainer = (FrameLayout) this.rootDrawerLayout.findViewById(R.id.task_list_container);
 
-		//setup floating action button
-		FloatingActionButton fab = (FloatingActionButton) this.rootDrawerLayout.findViewById(R.id.fab);
-		fab.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				Toast.makeText(MainActivity.this, "Pressed fab", Toast.LENGTH_SHORT).show();
+		// Check that the activity is using the layout version with
+		// the fragment_container FrameLayout (for tablet support using different layout)
+		if (this.rootView.findViewById(R.id.main_frag_container) != null) {
+			// However, if we're being restored from a previous state,
+			// then we don't need to do anything and should return or else
+			// we could end up with overlapping fragments.
+			if (savedInstanceState != null) {
+				return;
 			}
-		});
+
+//			this.mainFragContainer = (FrameLayout) this.rootDrawerLayout.findViewById(R.id.main_frag_container);
+
+			// In case this activity was started with special instructions from an
+			// Intent, pass the Intent's extras to the fragment as arguments
+			HomeFragment homeFragment = new HomeFragment();
+			homeFragment.setArguments(getIntent().getExtras());
+
+			getSupportFragmentManager().beginTransaction()
+					.add(R.id.main_frag_container, homeFragment, "home_fragment").commit();
+		}
 	}
 
 	@Override
