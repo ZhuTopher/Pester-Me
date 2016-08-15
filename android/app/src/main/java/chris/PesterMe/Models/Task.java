@@ -5,7 +5,7 @@ package chris.PesterMe.Models;
  */
 
 public abstract class Task { // TODO: use as an abstract class: SubTask, MainTask (?)
-	// TODO: Task object, needs various fields including a list of subtasks
+	// TODO: properly adjust accessibility of Task objects
 	private String title, description;
 
 	protected Task(String title, String description) {
